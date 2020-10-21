@@ -4,7 +4,7 @@ import { CreateHome, DeleteHome, ListHomes, ListOneHome } from '../controllers/h
 const homeRouter = Router();
 
 homeRouter.post("/new", CreateHome)
-homeRouter.delete("/delete", DeleteHome)
+homeRouter.delete("/delete/:id", DeleteHome)
 homeRouter.get("/", ListHomes)
 homeRouter.get("/:id", ListOneHome)
 

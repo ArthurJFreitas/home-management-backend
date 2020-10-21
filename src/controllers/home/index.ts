@@ -9,8 +9,11 @@ export const CreateHome = async (req: Request, res: Response): Promise<Response>
 }  
 
 export const DeleteHome = async(req: Request, res: Response): Promise<Response> => {
-    const results = await getRepository(Homes).delete(req.body.id)
-    return res.status(200).json(results)
+    const homeName = await getRepository(Homes).findOne({where: {id: req.params.id}})
+    console.log(homeName)
+    const results = await getRepository(Homes).delete(req.params.id)
+
+    return res.status(200).json({message: `A casa ${homeName?.name} foi deletada com sucesso`})
 }
 
 export const ListHomes = async(req: Request, res: Response):Promise<Response> => {
