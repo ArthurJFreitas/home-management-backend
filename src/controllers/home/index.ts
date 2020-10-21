@@ -12,3 +12,8 @@ export const DeleteHome = async(req: Request, res: Response): Promise<Response> 
     const results = await getRepository(Homes).delete(req.body.id)
     return res.status(200).json(results)
 }
+
+export const ListHomes = async(req: Request, res: Response):Promise<Response> => {
+    const results = await getRepository(Homes).find()
+    return res.status(200).json(results)
+}
