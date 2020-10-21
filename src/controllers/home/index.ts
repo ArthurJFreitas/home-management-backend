@@ -17,3 +17,8 @@ export const ListHomes = async(req: Request, res: Response):Promise<Response> =>
     const results = await getRepository(Homes).find()
     return res.status(200).json(results)
 }
+
+export const ListOneHome = async(req: Request, res: Response): Promise<Response> => {
+    const results = await getRepository(Homes).findOne(req.params.id)
+    return res.status(200).json(results)
+}
