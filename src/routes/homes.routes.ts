@@ -1,12 +1,10 @@
 import { Router, Request, Response } from "express";
+import { CreateHome } from '../controllers/home'
 
 const homeRouter = Router();
 
-homeRouter.post("/new", (req: Request, res: Response) => {
-  const { name, ownerId } = req.body;
+homeRouter.post("/new", CreateHome)
 
-  res.json({ name, ownerId });
-  console.log(name, ownerId);
-});
+
 
 export default homeRouter;

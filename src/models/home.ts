@@ -16,4 +16,7 @@ export class Homes {
 
   @Column()
   updated_at!: Date;
+
+  @Column()
+  residents!: string;
 }
