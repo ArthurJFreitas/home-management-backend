@@ -66,11 +66,16 @@ export const UpdateUser = async (req: Request, res: Response): Promise<Response>
 
 export const DeleteUser = async(req: Request, res: Response): Promise<Response> => {
     try {
-        await getRepository(Users).delete(req.params.id)
-        return res.status(200).json({message: "Usuário deletado com sucesso!"})
+        const user = await getRepository(Users).findOne({where:{id:req.params.id}})
+
+        if(user) {
+            await getRepository(Users).delete(req.params.id)
+            return res.status(200).json({message: "Usuário deletado com sucesso!"})
+        }
+        return res.status(404).json({error: "Usuário não existe"})
     }
     catch {
-        return res.status(404).json({error: "Usuário não existe"})
+        return res.status(404).json({error: "Erro"})
     }
 
     
