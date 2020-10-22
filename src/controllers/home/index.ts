@@ -1,6 +1,7 @@
 import { json, Request, Response } from 'express'
 import { Homes } from '../../models/home'
 import { getRepository } from 'typeorm'
+import { Users } from '../../models/user'
 
 export const CreateHome = async (req: Request, res: Response): Promise<Response> => {
     const newHome = await getRepository(Homes).create(req.body)
@@ -32,13 +33,19 @@ export const ListOneHome = async(req: Request, res: Response): Promise<Response>
 }
 
 export const UpdateHome = async(req: Request, res: Response): Promise<Response> => {
-    const home = await getRepository(Homes).findOne({where: {id: req.params.id}})
-    if(home){
+  
+    try {
+        const home = await getRepository(Homes).findOne({where: {id: req.params.id}})
+    
         // const merge = await getRepository(Homes).merge(home, req.body)
         // const result = await getRepository(Homes).save(merge)
         const newHome = {...home, ...req.body}
         const result = await getRepository(Homes).save(newHome)
         return res.status(200).json(result)
     }
-    return res.status(304).json('Usuário não existe')   
+    catch {
+        return res.status(404).json('Essa casa não existe')   
+    }
+ 
 }
+

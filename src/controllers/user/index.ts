@@ -50,7 +50,29 @@ export const ListOneUser = async (req: Request, res: Response): Promise<Response
     catch {
         return res.status(404).json({error: "Usuário não existe"})
     }
+}
 
+export const UpdateUser = async (req: Request, res: Response): Promise<Response> => {
+   try {
+    const oldUser = await getRepository(Users).findOne({where:{id:req.params.id}})
+    const newUser = {...oldUser, ...req.body}
+    await getRepository(Users).save(newUser)
+    return res.status(200).json(newUser)
+   }
+   catch {
+    return res.status(404).json({error: "Usuário não existe"})
+   }
+}
 
+export const DeleteUser = async(req: Request, res: Response): Promise<Response> => {
+    try {
+        await getRepository(Users).delete(req.params.id)
+        return res.status(200).json({message: "Usuário deletado com sucesso!"})
+    }
+    catch {
+        return res.status(404).json({error: "Usuário não existe"})
+    }
+
+    
 }
 
