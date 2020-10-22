@@ -21,9 +21,14 @@ export const ListHomes = async(req: Request, res: Response):Promise<Response> =>
     return res.status(200).json(results)
 }
 
-export const ListOneHome = async(req: Request, res: Response): Promise<Response> => {
-    const results = await getRepository(Homes).findOne(req.params.id)
-    return res.status(200).json(results)
+export const ListOneHome = async(req: Request, res: Response): Promise<Response> => {  
+    try {
+        const results = await getRepository(Homes).findOne(req.params.id)
+        return res.status(200).json(results)
+    }
+    catch {
+        return res.status(404).json({error: "Essa casa não existe!"})
+    }
 }
 
 export const UpdateHome = async(req: Request, res: Response): Promise<Response> => {
