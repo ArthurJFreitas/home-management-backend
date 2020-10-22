@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column , CreateDateColumn, UpdateDateColumn} from "typeorm";
 
 @Entity("Homes")
 export class Homes {
@@ -12,8 +12,10 @@ export class Homes {
   ownerid!: number;
 
   @Column()
+  @CreateDateColumn()
   created_at!: Date;
 
   @Column()
+  @UpdateDateColumn()
   updated_at!: Date;
 }
