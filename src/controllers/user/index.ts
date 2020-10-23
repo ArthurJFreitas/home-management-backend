@@ -77,7 +77,5 @@ export const DeleteUser = async(req: Request, res: Response): Promise<Response> 
     catch {
         return res.status(404).json({error: "Erro"})
     }
-
-    
 }
 
